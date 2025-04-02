@@ -1,0 +1,21 @@
+.liquid-overlay {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at center, 
+        rgba(255, 215, 0, 0.1) 0%, 
+        rgba(43, 33, 29, 0.95) 70%);
+    mix-blend-mode: multiply;
+}
+
+.cta {
+    background: var(--gold);
+    color: var(--espresso);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
