@@ -37,3 +37,23 @@
         padding: 0 1rem;
     }
 }
+
+/* Add to existing CSS */
+.liquid-overlay {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at center, 
+        rgba(255, 215, 0, 0.1) 0%, 
+        rgba(43, 33, 29, 0.95) 70%);
+    mix-blend-mode: multiply;
+}
+
+.cta {
+    background: var(--gold);
+    color: var(--espresso);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
