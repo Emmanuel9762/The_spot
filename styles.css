@@ -1,0 +1,39 @@
+/* Navigation Styles */
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 0;
+    background: rgba(43, 33, 29, 0.9);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 0 2rem;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+/* Responsive Base */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 4rem;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+}
