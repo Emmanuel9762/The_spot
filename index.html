@@ -2,32 +2,397 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Spot | Sterkspruit's Ultimate Nightlife Experience</title>
+    <title>The Spot | Sterkspruit's Premier Urban Oasis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* ===== Base Styles ===== */
+        :root {
+            --espresso: #2B211D;
+            --gold: #FFD700;
+            --accent: #FF4E50;
+            --text-light: #F5E6CA;
+            --x: 50%;
+            --y: 50%;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--espresso);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        /* ===== Enhanced Navigation ===== */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(43, 33, 29, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 0 2rem;
+            margin: 0;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== Liquid Motion Hero ===== */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            filter: blur(3px);
+        }
+
+        .liquid-overlay {
+            position: absolute;
+            top: 0;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle at var(--x) var(--y), 
+                rgba(255, 215, 0, 0.1) 0%, 
+                rgba(43, 33, 29, 0.95) 70%);
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 8rem;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+
+        /* ===== Holographic Menu Cards ===== */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .menu-card {
+            background: linear-gradient(45deg,
+                rgba(255, 215, 0, 0.1),
+                rgba(255, 78, 80, 0.1));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            min-height: 400px;
+        }
+
+        .card-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(43, 33, 29, 0) 0%, rgba(43, 33, 29, 0.9) 100%);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        .price {
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            animation: hologram 1.5s infinite;
+        }
+
+        /* ===== Interactive Elements ===== */
+        .cta {
+            background: linear-gradient(45deg, var(--gold), var(--accent));
+            color: var(--espresso);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 1px;
+        }
+
+        .cta:hover {
+            transform: scale(1.05) rotate(-3deg);
+        }
+
+        /* ===== Animations ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes hologram {
+            0% { 
+                filter: hue-rotate(0deg) brightness(1.1);
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            }
+            100% { 
+                filter: hue-rotate(360deg) brightness(1.1);
+                box-shadow: 0 0 50px rgba(255, 78, 80, 0.3);
+            }
+        }
+
+        /* ===== Mobile Responsive ===== */
+        @media (max-width: 768px) {
+            .logo { font-size: 4rem; }
+            .nav-links { gap: 1.5rem; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .nav-links a { font-size: 1rem; }
+            .card-image { height: 200px; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Dynamic Includes -->
-    <div data-include="partials/sound-control.html"></div>
-    <div data-include="partials/navigation.html"></div>
-    
+    <!-- Ambient Sound Control -->
+    <div class="sound-toggle">
+        <button id="soundBtn" class="cta">🔊 Play Ambiance</button>
+        <audio loop id="ambianceTrack">
+            <source src="audio/ambiance.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <div class="nav-container">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#menu">Cocktails</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#contact">Find Us</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <!-- Hero Section -->
-    <div data-include="partials/hero-section.html"></div>
+    <section class="hero" id="hero">
+        <video class="hero-video" autoplay muted loop>
+            <source src="videos/bar-loop.mp4" type="video/mp4">
+        </video>
+        <div class="liquid-overlay"></div>
+        <div class="hero-content">
+            <h1 class="logo">THE SPOT</h1>
+            <p class="tagline">Where Sterkspruit Comes Alive</p>
+            <button class="cta" onclick="scrollToSection('menu')">Tonight's Lineup →</button>
+        </div>
+    </section>
 
-    <!-- Content Sections -->
-    <div data-include="partials/quiz-section.html"></div>
-    <div data-include="partials/menu.html"></div>
-    <div data-include="partials/specials-carousel.html"></div>
+    <!-- AI Drink Recommender -->
+    <section class="quiz-section">
+        <div class="quiz-container">
+            <div class="quiz-question active" data-question="1">
+                <h3>What's Your Vibe Tonight?</h3>
+                <button class="quiz-option cta" data-mood="adventurous">🦄 Wildcard</button>
+                <button class="quiz-option cta" data-mood="classy">🍸 Timeless</button>
+            </div>
+            <div id="drink-result" class="hidden">
+                <h4>Your Perfect Match:</h4>
+                <div class="result-card menu-card"></div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Scripts -->
-    <script src="js/includes.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/quiz.js"></script>
+    <!-- Menu Grid -->
+    <section id="menu">
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="card-image" style="background-image: url('images/menu/mermaize-mule.jpg')"></div>
+                <div class="card-content">
+                    <h3>Mermaize Mule</h3>
+                    <p>Vodka · Ginger Beer · Lime · Mystery</p>
+                    <span class="price">R55</span>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="card-image" style="background-image: url('images/menu/gold-rush.jpg')"></div>
+                <div class="card-content">
+                    <h3>Gold Rush</h3>
+                    <p>Bourbon · Honey · Lemon · Gold Flakes</p>
+                    <span class="price">R75</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specials Carousel -->
+    <section id="specials">
+        <div class="specials-carousel">
+            <div class="special-item menu-card">
+                <div class="card-image" style="background-image: url('images/specials/blowjob-shots.jpg')"></div>
+                <div class="card-content">
+                    <h4>BLOW JOB SHOTS</h4>
+                    <p>3 for R45</p>
+                    <small>Until 10PM</small>
+                </div>
+            </div>
+            <div class="special-item menu-card">
+                <div class="card-image" style="background-image: url('images/specials/ladies-night.jpg')"></div>
+                <div class="card-content">
+                    <h4>LADIES' NIGHT</h4>
+                    <p>50% Off Gold Cocktails</p>
+                    <small>Wednesdays Only</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Find Us</h2>
+            <div class="contact-grid">
+                <div class="map-card menu-card">
+                    <div class="card-image" style="background-image: url('images/map.jpg')"></div>
+                    <div class="card-content">
+                        <h3>123 Urban Lane</h3>
+                        <p>Sterkspruit, Eastern Cape</p>
+                        <p>Open Daily: 10AM - 2AM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Liquid Motion Effect
+        document.addEventListener('mousemove', (e) => {
+            document.documentElement.style.setProperty('--x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--y', `${e.clientY}px`);
+        });
+
+        // Ambient Sound Control
+        let isPlaying = false;
+        const ambiance = document.getElementById('ambianceTrack');
+        document.getElementById('soundBtn').addEventListener('click', () => {
+            isPlaying ? ambiance.pause() : ambiance.play();
+            isPlaying = !isPlaying;
+            document.getElementById('soundBtn').textContent = 
+                isPlaying ? '🔇 Pause Ambiance' : '🔊 Play Ambiance';
+        });
+
+        // Drink Recommender
+        const drinkDatabase = {
+            adventurous: ['Smoked Chilli Margarita', 'Liquid Nitrogen Daiquiri'],
+            classy: ['24K Gold Martini', 'Vintage Manhattan']
+        };
+
+        document.querySelectorAll('.quiz-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const recommendation = drinkDatabase[btn.dataset.mood][
+                    Math.floor(Math.random() * drinkDatabase[btn.dataset.mood].length)
+                ];
+                document.querySelector('.result-card').innerHTML = `
+                    <div class="card-image" style="background-image: url('images/menu/${recommendation.toLowerCase().replace(/ /g, '-')}.jpg')"></div>
+                    <div class="card-content">
+                        <h5>${recommendation}</h5>
+                        <p>${btn.dataset.mood} choice unlocked!</p>
+                    </div>
+                `;
+                document.getElementById('drink-result').classList.remove('hidden');
+            });
+        });
+
+        // Smooth Scroll
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenu = () => {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('active');
+        };
+    </script>
 </body>
 </html>
