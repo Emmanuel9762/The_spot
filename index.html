@@ -287,7 +287,7 @@
     <section id="menu">
         <div class="menu-grid">
             <div class="menu-card">
-                <div class="card-image" style="background-image: url('images/menu/mermaize-mule.jpg')"></div>
+                <div class="card-image" style="background-image: url('assets/arpevito.jpeg')"></div>
                 <div class="card-content">
                     <h3>Mermaize Mule</h3>
                     <p>Vodka · Ginger Beer · Lime · Mystery</p>
@@ -295,7 +295,7 @@
                 </div>
             </div>
             <div class="menu-card">
-                <div class="card-image" style="background-image: url('images/menu/gold-rush.jpg')"></div>
+                <div class="card-image" style="background-image: url('assets/cosmopolitan.jpeg')"></div>
                 <div class="card-content">
                     <h3>Gold Rush</h3>
                     <p>Bourbon · Honey · Lemon · Gold Flakes</p>
@@ -309,7 +309,7 @@
     <section id="specials">
         <div class="specials-carousel">
             <div class="special-item menu-card">
-                <div class="card-image" style="background-image: url('images/specials/blowjob-shots.jpg')"></div>
+                <div class="card-image" style="background-image: url('assets/drink-lineup.jpeg')"></div>
                 <div class="card-content">
                     <h4>BLOW JOB SHOTS</h4>
                     <p>3 for R45</p>
@@ -317,7 +317,7 @@
                 </div>
             </div>
             <div class="special-item menu-card">
-                <div class="card-image" style="background-image: url('images/specials/ladies-night.jpg')"></div>
+                <div class="card-image" style="background-image: url('assets/download (3).jpeg')"></div>
                 <div class="card-content">
                     <h4>LADIES' NIGHT</h4>
                     <p>50% Off Gold Cocktails</p>
@@ -333,7 +333,7 @@
             <h2>Find Us</h2>
             <div class="contact-grid">
                 <div class="map-card menu-card">
-                    <div class="card-image" style="background-image: url('images/map.jpg')"></div>
+                    <div class="card-image" style="background-image: url('assets/Find-us.jpeg')"></div>
                     <div class="card-content">
                         <h3>123 Urban Lane</h3>
                         <p>Sterkspruit, Eastern Cape</p>
@@ -373,7 +373,7 @@
                     Math.floor(Math.random() * drinkDatabase[btn.dataset.mood].length)
                 ];
                 document.querySelector('.result-card').innerHTML = `
-                    <div class="card-image" style="background-image: url('images/menu/${recommendation.toLowerCase().replace(/ /g, '-')}.jpg')"></div>
+                    <div class="card-image" style="background-image: url('./assets/${recommendation.toLowerCase().replace(/ /g, '-')}.jpg')"></div>
                     <div class="card-content">
                         <h5>${recommendation}</h5>
                         <p>${btn.dataset.mood} choice unlocked!</p>
