@@ -1,398 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-ZA">
 <head>
-    <meta charset="UTF-8">
-    <title>The Spot | Sterkspruit's Premier Urban Oasis</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===== Base Styles ===== */
-        :root {
-            --espresso: #2B211D;
-            --gold: #FFD700;
-            --accent: #FF4E50;
-            --text-light: #F5E6CA;
-            --x: 50%;
-            --y: 50%;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--espresso);
-            color: var(--text-light);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        /* ===== Enhanced Navigation ===== */
-        .nav-container {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(43, 33, 29, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-        }
-
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            padding: 0 2rem;
-            margin: 0;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* ===== Liquid Motion Hero ===== */
-        .hero {
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-            filter: blur(3px);
-        }
-
-        .liquid-overlay {
-            position: absolute;
-            top: 0;
-            left: -10%;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle at var(--x) var(--y), 
-                rgba(255, 215, 0, 0.1) 0%, 
-                rgba(43, 33, 29, 0.95) 70%);
-            pointer-events: none;
-            mix-blend-mode: multiply;
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 8rem;
-            color: var(--gold);
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-            animation: float 3s ease-in-out infinite;
-            margin-bottom: 2rem;
-        }
-
-        /* ===== Holographic Menu Cards ===== */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 2rem;
-        }
-
-        .menu-card {
-            background: linear-gradient(45deg,
-                rgba(255, 215, 0, 0.1),
-                rgba(255, 78, 80, 0.1));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            min-height: 400px;
-        }
-
-        .card-image {
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .card-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, rgba(43, 33, 29, 0) 0%, rgba(43, 33, 29, 0.9) 100%);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1;
-        }
-
-        .price {
-            color: var(--gold);
-            font-size: 1.4rem;
-            margin-top: 0.5rem;
-            display: block;
-        }
-
-        .menu-card:hover {
-            transform: translateY(-10px) rotate(1deg);
-            animation: hologram 1.5s infinite;
-        }
-
-        /* ===== Interactive Elements ===== */
-        .cta {
-            background: linear-gradient(45deg, var(--gold), var(--accent));
-            color: var(--espresso);
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            font-family: 'Bebas Neue', cursive;
-            letter-spacing: 1px;
-        }
-
-        .cta:hover {
-            transform: scale(1.05) rotate(-3deg);
-        }
-
-        /* ===== Animations ===== */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes hologram {
-            0% { 
-                filter: hue-rotate(0deg) brightness(1.1);
-                box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
-            }
-            100% { 
-                filter: hue-rotate(360deg) brightness(1.1);
-                box-shadow: 0 0 50px rgba(255, 78, 80, 0.3);
-            }
-        }
-
-        /* ===== Mobile Responsive ===== */
-        @media (max-width: 768px) {
-            .logo { font-size: 4rem; }
-            .nav-links { gap: 1.5rem; }
-            .menu-grid { grid-template-columns: 1fr; }
-            .nav-links a { font-size: 1rem; }
-            .card-image { height: 200px; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142a24">
+  <title>The Spot — Bar & Eatery · Sterkspruit</title>
+  <meta name="description" content="Your kind of spot. Cocktails, good food and good company at The Spot bar and eatery in Sterkspruit, Eastern Cape.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23142a24'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia' font-size='45' fill='%23ebc179'%3Es%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/site.js" defer></script>
 </head>
 <body>
-    <!-- Ambient Sound Control -->
-    <div class="sound-toggle">
-        <button id="soundBtn" class="cta">🔊 Play Ambiance</button>
-        <audio loop id="ambianceTrack">
-            <source src="audio/ambiance.mp3" type="audio/mpeg">
-        </audio>
-    </div>
-
-    <!-- Sticky Navigation -->
-    <div class="nav-container">
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#menu">Cocktails</a></li>
-                <li><a href="#events">Events</a></li>
-                <li><a href="#contact">Find Us</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <video class="hero-video" autoplay muted loop>
-            <source src="videos/bar-loop.mp4" type="video/mp4">
-        </video>
-        <div class="liquid-overlay"></div>
-        <div class="hero-content">
-            <h1 class="logo">THE SPOT</h1>
-            <p class="tagline">Where Sterkspruit Comes Alive</p>
-            <button class="cta" onclick="scrollToSection('menu')">Tonight's Lineup →</button>
-        </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a href="#home" class="wordmark" aria-label="The Spot home">the spot<span class="brand-dot">.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="navigation" hidden>Menu <span aria-hidden="true">＋</span></button>
+    <nav id="navigation" aria-label="Main navigation">
+      <a href="#about">The spot</a><a href="#menu">The drinks</a><a href="#events">What's on</a><a class="nav-visit" href="#visit">Come through <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero page-width" id="home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Bar & eatery <span aria-hidden="true">/</span> Sterkspruit, Eastern Cape</p>
+        <h1 id="hero-title">Your kind<br>of <em>spot.</em></h1>
+        <p class="hero-description">A little escape. A proper catch-up.<br>Good food, great drinks, your favourite people.</p>
+        <a class="button button-gold" href="#menu">Find your next favourite <span aria-hidden="true">↗</span></a>
+      </div>
+      <figure class="hero-visual">
+        <div class="photo-frame"><img src="assets/drink-lineup.jpeg" width="612" height="405" alt="Four colourful cocktails garnished with citrus on a bar" fetchpriority="high"></div>
+        <div class="photo-stamp" aria-hidden="true"><span>GOOD DRINKS</span><b>&</b><span>BETTER COMPANY</span></div>
+        <figcaption><span>A taste of The Spot</span><span>Pull up. Settle in.</span></figcaption>
+      </figure>
+      <div class="hero-bottom"><span>Where Sterkspruit comes alive.</span><a href="#about">Stay a little longer <span aria-hidden="true">↓</span></a></div>
     </section>
-
-    <!-- AI Drink Recommender -->
-    <section class="quiz-section">
-        <div class="quiz-container">
-            <div class="quiz-question active" data-question="1">
-                <h3>What's Your Vibe Tonight?</h3>
-                <button class="quiz-option cta" data-mood="adventurous">🦄 Wildcard</button>
-                <button class="quiz-option cta" data-mood="classy">🍸 Timeless</button>
-            </div>
-            <div id="drink-result" class="hidden">
-                <h4>Your Perfect Match:</h4>
-                <div class="result-card menu-card"></div>
-            </div>
-        </div>
+    <div class="ticker" aria-hidden="true"><span>GOOD FOOD</span><i>✳</i><span>GREAT DRINKS</span><i>✳</i><span>YOUR PEOPLE</span><i>✳</i><span>THE SPOT</span><i>✳</i></div>
+    <section class="intro page-width section-pad" id="about" aria-labelledby="about-title">
+      <p class="eyebrow">A place to make your own</p>
+      <div><h2 id="about-title">The plans can wait.<br><em>You're at The Spot.</em></h2><p>A bar and eatery in the heart of Sterkspruit. Come for a drink, catch up over a meal, and make a little time for the people you came with.</p></div>
     </section>
-
-    <!-- Menu Grid -->
-    <section id="menu">
-        <div class="menu-grid">
-            <div class="menu-card">
-                <div class="card-image" style="background-image: url('assets/arpevito.jpeg')"></div>
-                <div class="card-content">
-                    <h3>Mermaize Mule</h3>
-                    <p>Vodka · Ginger Beer · Lime · Mystery</p>
-                    <span class="price">R55</span>
-                </div>
-            </div>
-            <div class="menu-card">
-                <div class="card-image" style="background-image: url('assets/cosmopolitan.jpeg')"></div>
-                <div class="card-content">
-                    <h3>Gold Rush</h3>
-                    <p>Bourbon · Honey · Lemon · Gold Flakes</p>
-                    <span class="price">R75</span>
-                </div>
-            </div>
+    <section class="drinks section-pad" id="menu" aria-labelledby="menu-title">
+      <div class="page-width">
+        <div class="section-heading"><div><p class="eyebrow">From behind the bar</p><h2 id="menu-title">Something <em>with spirit.</em></h2></div><p>Start with a signature.<br>Find your favourite.</p></div>
+        <div class="drink-list">
+          <article class="drink"><span class="drink-number">01</span><div><p class="drink-note">Fresh · Zesty · A little unexpected</p><h3>Mermaize Mule</h3><p>Vodka, ginger beer, lime & a little mystery.</p></div><span class="drink-tag">The fresh one</span></article>
+          <article class="drink"><span class="drink-number">02</span><div><p class="drink-note">Smooth · Golden · Easy-going</p><h3>Gold Rush</h3><p>Bourbon, honey, lemon & gold flakes.</p></div><span class="drink-tag">The golden one</span></article>
         </div>
+        <p class="menu-note">Ask at the bar for the full drinks list, today's food menu and current prices.</p>
+      </div>
     </section>
-
-    <!-- Specials Carousel -->
-    <section id="specials">
-        <div class="specials-carousel">
-            <div class="special-item menu-card">
-                <div class="card-image" style="background-image: url('assets/drink-lineup.jpeg')"></div>
-                <div class="card-content">
-                    <h4>BLOW JOB SHOTS</h4>
-                    <p>3 for R45</p>
-                    <small>Until 10PM</small>
-                </div>
-            </div>
-            <div class="special-item menu-card">
-                <div class="card-image" style="background-image: url('assets/download (3).jpeg')"></div>
-                <div class="card-content">
-                    <h4>LADIES' NIGHT</h4>
-                    <p>50% Off Gold Cocktails</p>
-                    <small>Wednesdays Only</small>
-                </div>
-            </div>
+    <section class="finder page-width section-pad" aria-labelledby="finder-title">
+      <div class="finder-copy"><p class="eyebrow">Let your mood choose</p><h2 id="finder-title">What's your<br><em>flavour?</em></h2><p>Two signatures. Two very good places to start.</p>
+        <div class="flavour-options" role="group" aria-label="Choose a cocktail flavour" hidden>
+          <button type="button" data-flavour="fresh" aria-pressed="true">Fresh & zesty <span aria-hidden="true">↗</span></button>
+          <button type="button" data-flavour="golden" aria-pressed="false">Smooth & golden <span aria-hidden="true">↗</span></button>
         </div>
+        <noscript><p>Try the Mermaize Mule for a fresh, zesty drink, or the Gold Rush for something smooth and golden.</p></noscript>
+      </div>
+      <div class="recommendation" aria-live="polite" aria-atomic="true">
+        <p class="eyebrow">Your next favourite</p><span class="recommendation-number" aria-hidden="true">01</span>
+        <h3 id="recommendation-name">Mermaize Mule</h3><p id="recommendation-detail">A bright mix of vodka, ginger beer and lime, with a little mystery.</p><p class="recommendation-finish" id="recommendation-finish">Crisp. Citrusy. Full of character.</p><a href="#menu">Back to the drinks <span aria-hidden="true">↑</span></a>
+      </div>
     </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Find Us</h2>
-            <div class="contact-grid">
-                <div class="map-card menu-card">
-                    <div class="card-image" style="background-image: url('assets/Find-us.jpeg')"></div>
-                    <div class="card-content">
-                        <h3>123 Urban Lane</h3>
-                        <p>Sterkspruit, Eastern Cape</p>
-                        <p>Open Daily: 10AM - 2AM</p>
-                    </div>
-                </div>
-            </div>
+    <section class="events section-pad" id="events" aria-labelledby="events-title">
+      <div class="page-width events-layout">
+        <div><p class="eyebrow">Good company. Better evenings.</p><h2 id="events-title">Make a night<br><em>of it.</em></h2>
+          <figure class="venue-photo"><img src="assets/Find-us.jpeg" width="259" height="194" alt="Inside The Spot, lit in green" loading="lazy"><figcaption>A little of the atmosphere.</figcaption></figure>
         </div>
+        <div class="events-notes">
+          <article><span class="eyebrow">What's on</span><h3>Watch this spot.</h3><p>New event dates will appear here. In the meantime, ask the team at the bar about upcoming nights and current specials.</p></article>
+          <article><span class="eyebrow">From the kitchen</span><h3>Bring your appetite.</h3><p>Make time for a meal while you're here. Ask the team for today's food menu and what's available from the kitchen.</p></article>
+          <a href="#visit" class="text-link">Come find us <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
     </section>
-
-    <script>
-        // Liquid Motion Effect
-        document.addEventListener('mousemove', (e) => {
-            document.documentElement.style.setProperty('--x', `${e.clientX}px`);
-            document.documentElement.style.setProperty('--y', `${e.clientY}px`);
-        });
-
-        // Ambient Sound Control
-        let isPlaying = false;
-        const ambiance = document.getElementById('ambianceTrack');
-        document.getElementById('soundBtn').addEventListener('click', () => {
-            isPlaying ? ambiance.pause() : ambiance.play();
-            isPlaying = !isPlaying;
-            document.getElementById('soundBtn').textContent = 
-                isPlaying ? '🔇 Pause Ambiance' : '🔊 Play Ambiance';
-        });
-
-        // Drink Recommender
-        const drinkDatabase = {
-            adventurous: ['Smoked Chilli Margarita', 'Liquid Nitrogen Daiquiri'],
-            classy: ['24K Gold Martini', 'Vintage Manhattan']
-        };
-
-        document.querySelectorAll('.quiz-option').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const recommendation = drinkDatabase[btn.dataset.mood][
-                    Math.floor(Math.random() * drinkDatabase[btn.dataset.mood].length)
-                ];
-                document.querySelector('.result-card').innerHTML = `
-                    <div class="card-image" style="background-image: url('./assets/${recommendation.toLowerCase().replace(/ /g, '-')}.jpg')"></div>
-                    <div class="card-content">
-                        <h5>${recommendation}</h5>
-                        <p>${btn.dataset.mood} choice unlocked!</p>
-                    </div>
-                `;
-                document.getElementById('drink-result').classList.remove('hidden');
-            });
-        });
-
-        // Smooth Scroll
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Mobile Menu Toggle
-        const mobileMenu = () => {
-            const nav = document.querySelector('.nav-links');
-            nav.classList.toggle('active');
-        };
-    </script>
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="page-width visit-layout"><div><p class="eyebrow">Your people. Your place.</p><h2 id="visit-title">See you<br><em>at The Spot.</em></h2></div><div class="visit-details"><p class="location">Sterkspruit<br>Eastern Cape, South Africa</p><p class="visit-note">Find us on Maps for location information before you head over.</p><a class="button button-dark" href="https://www.google.com/maps/search/?api=1&query=The%20Spot%20Sterkspruit%20Eastern%20Cape%20South%20Africa" target="_blank" rel="noopener noreferrer">Find The Spot on Maps <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div></div>
+    </section>
+  </main>
+  <footer class="site-footer page-width"><a class="wordmark" href="#home" aria-label="The Spot, back to top">the spot<span class="brand-dot">.</span></a><span>Where Sterkspruit comes alive.</span><a class="back-top" href="#home">Back to top ↑</a></footer>
 </body>
 </html>
